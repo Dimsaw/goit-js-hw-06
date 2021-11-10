@@ -1,55 +1,19 @@
-const counterValue = function ({
-  rootSelector,
-  initialValue = 0,
-  step = 1,
-  onUpdate = () => null,
-} = {}) {
-  this._value = initialValue;
-  this._step = step;
-  this._refs = this._getRefs(rootSelector);
-
-  this.onUpdate = onUpdate;
-
-  this._bindEvents();
-  this.updateValueUI();
+const refs = {
+  incrementBtn: document.querySelector('[data-action="increment"]'),
+  decrementBtn: document.querySelector('[data-action="decrement"]'),
 };
+let valueOfSpan = document.querySelector("#value");
 
-counterValue.prototype._getRefs = function (rootSelector) {
-  const refs = {};
+let counterValue = 0;
 
-  refs.incrementBtn = document.querySelector('[data-action="increment"]');
-  refs.decrementBtn = document.querySelector('[data-action="decrement');
-  refs.value = document.querySelector("#value");
+refs.incrementBtn.addEventListener("click", () => {
+  counterValue += 1;
+  valueOfSpan.textContent = counterValue;
+  console.log(valueOfSpan);
+});
 
-  return refs;
-};
-
-counterValue.prototype._bindEvents = function () {
-  this._refs.incrementBtn.addEventListener("click", () => {
-    console.log("counterValue.prototype._bindEvents -> this", this);
-    this.increment();
-    this.updateValueUI();
-  });
-
-  this._refs.decrementBtn.addEventListener("click", () => {
-    console.log("counterValue.prototype._bindEvents -> this", this);
-    this.decrement();
-    this.updateValueUI();
-  });
-};
-
-counterValue.prototype.updateValueUI = function () {
-  this._refs.value.textContent = this._value;
-
-  this.onUpdate();
-};
-
-counterValue.prototype.increment = function () {
-  this._value += this._step;
-};
-
-counterValue.prototype.decrement = function () {
-  this._value -= this._step;
-};
-
-new counterValue({ rootSelector: "#counter", step: 1 });
+refs.decrementBtn.addEventListener("click", () => {
+  counterValue -= 1;
+  valueOfSpan.textContent = counterValue;
+  console.log(valueOfSpan);
+});

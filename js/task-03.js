@@ -18,7 +18,7 @@ const titleEl = document.querySelector(".gallery");
 const markup = images
   .map(
     (image) =>
-      `<li class='list'> <img src = ${image.url} alt = ${image.alt} width = '480'> </li>`
+      `<li class='list'> <img src = "${image.url}" alt = "${image.alt}" width = '480'> </li>`
   )
   .join("");
 
